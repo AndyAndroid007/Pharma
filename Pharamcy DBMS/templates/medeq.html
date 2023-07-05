@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <title>Hexashop - Product Detail Page</title>
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/font-awesome.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.css') }}">
+
+    <!-- <link rel="stylesheet" href="static/css/templatemo-hexashop.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/templatemo-hexashop.css') }}">
+
+
+    <!-- <link rel="stylesheet" href="static/css/owl-carousel.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl-carousel.css') }}">
+
+
+    <!-- <link rel="stylesheet" href="static/css/lightbox.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lightbox.css') }}">
+    <!--
+
+TemplateMo 571 Hexashop
+
+https://templatemo.com/tm-571-hexashop
+
+-->
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <!-- <a href="index.html" class="logo">
+                            <img src="assets/images/logo.png">
+                        </a> -->
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{{ url_for('home')}}" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="{{ url_for('medeq')}}">Medical Equipments</a></li>
+                            <li class="scroll-to-section"><a href="{{ url_for('supp')}}">Supplements</a></li>
+                            <li class="scroll-to-section"><a href="{{ url_for('counter')}}">Over-the-Counter</a></li>
+                            <li class="scroll-to-section"><a href="{{ url_for('pres')}}">Prescription Meds</a></li>
+
+
+                            <li class="scroll-to-section"><a href="#">About</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="page-heading" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Medical Equipments</h2>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+
+    <!-- ***** Product Area Starts ***** -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #edit-form-container {
+            display: block;
+            margin: 2rem auto;
+            /* Added margin to center the container horizontally */
+            max-width: 400px;
+            /* Optional: Set a maximum width for the container */
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #edit-form-container h2 {
+            margin-bottom: 10px;
+            color: #333;
+            /* Optional: Set the color for the heading */
+        }
+
+        #edit-form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            /* Optional: Set the color for the labels */
+        }
+
+        #edit-form-container input[type="text"],
+        #edit-form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #edit-form-container input[type="submit"],
+        #edit-form-container button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #edit-form-container button#cancel-btn {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+
+        #edit-form-container input[type="submit"]:hover,
+        #edit-form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <section class="section" id="medeq">
+        <div class="container">
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Row</th>
+                    <th>Column</th>
+                    <th>Price</th>
+                </tr>
+                {% for record in medeq_records %}
+                <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.product_name }}</td>
+                    <td>{{ record.quantity }}</td>
+                    <td>{{ record.rowno }}</td>
+                    <td>{{ record.columnno }}</td>
+                    <td>{{ record.price }}</td>
+
+                    <td>
+                        <button class="edit-btn" data-id="{{ record.id }}">Edit</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <div style="height: 3rem;"></div>
+
+            <div id="edit-form-container" style="display: none;">
+                <h2>Update</h2>
+                <form id="edit-form">
+                    <input type="hidden" id="edit-id" name="id">
+                    <label for="edit-product-name">Product Name:</label>
+                    <input type="text" id="edit-product-name" name="product_name"><br>
+
+                    <label for="edit-quantity">Quantity:</label>
+                    <input type="number" id="edit-quantity" name="quantity"><br>
+
+                    <label for="edit-rowno">Row No:</label>
+                    <input type="number" id="edit-rowno" name="rowno"><br>
+
+                    <label for="edit-columnno">Column No:</label>
+                    <input type="number" id="edit-columnno" name="columnno"><br>
+
+                    <label for="edit-price">Price:</label>
+                    <input type="number" id="edit-price" name="price"><br>
+
+                    <input type="submit" value="Update">
+                    <button id="cancel-btn">Cancel</button>
+                </form>
+            </div>
+
+
+            <script>
+                // JavaScript code for handling the edit form
+                document.addEventListener("DOMContentLoaded", () => {
+                    const editBtns = document.querySelectorAll(".edit-btn");
+                    const editFormContainer = document.getElementById("edit-form-container");
+                    const editForm = document.getElementById("edit-form");
+                    const cancelBtn = document.getElementById("cancel-btn");
+
+                    editBtns.forEach(editBtn => {
+                        editBtn.addEventListener("click", () => {
+                            const recordId = editBtn.dataset.id;
+                            const row = editBtn.parentNode.parentNode;
+                            const productCell = row.cells[1];
+                            const quantityCell = row.cells[2];
+                            const rownoCell = row.cells[3];
+                            const columnnoCell = row.cells[4];
+                            const priceCell = row.cells[5];
+
+                            // Fill the edit form with the current record data
+                            document.getElementById("edit-id").value = recordId;
+                            document.getElementById("edit-product-name").value = productCell.innerText;
+                            document.getElementById("edit-quantity").value = quantityCell.innerText;
+                            document.getElementById("edit-rowno").value = rownoCell.innerText;
+                            document.getElementById("edit-columnno").value = columnnoCell.innerText;
+                            document.getElementById("edit-price").value = priceCell.innerText;
+
+                            editFormContainer.style.display = "block";
+
+                        });
+                    });
+
+                    editForm.addEventListener("submit", (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(editForm);
+
+                        // Make an AJAX request to update the record
+                        fetch("/update_medeq", {
+                            method: "POST",
+                            body: formData,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Update the table row with the new data
+                                    const recordId = data.record.id;
+                                    const updatedProduct = data.record.product_name;
+                                    const updatedQuantity = data.record.quantity;
+                                    const updatedRowno = data.record.rowno;
+                                    const updatedColumnno = data.record.columnno;
+                                    const updatedPrice = data.record.price;
+
+                                    const row = document.querySelector(`[data-record-id="${recordId}"]`);
+                                    row.cells[1].innerText = updatedProduct;
+                                    row.cells[2].innerText = updatedQuantity;
+                                    row.cells[3].innerText = updatedRowno;
+                                    row.cells[4].innerText = updatedColumnno;
+                                    row.cells[5].innerText = updatedPrice;
+
+                                    editFormContainer.style.display = "none";
+
+                                }
+                            });
+                    });
+
+                    cancelBtn.addEventListener("click", () => {
+                        editFormContainer.style.display = "none";
+                    });
+                });
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const editBtns = document.querySelectorAll(".edit-btn");
+                    const editFormContainer = document.getElementById("edit-form-container");
+                    const editForm = document.getElementById("edit-form");
+                    const cancelBtn = document.getElementById("cancel-btn");
+
+                    editBtns.forEach(editBtn => {
+                        editBtn.addEventListener("click", () => {
+                            
+                        });
+                    });
+
+                    editForm.addEventListener("submit", (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(editForm);
+
+                        
+                        fetch("/update_medeq", {
+                            method: "POST",
+                            body: formData,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    
+
+                                    editFormContainer.style.display = "none";
+
+                                    
+                                    location.reload();
+                                }
+                            });
+                    });
+
+                    cancelBtn.addEventListener("click", () => {
+                        editFormContainer.style.display = "none";
+                    });
+                });
+            </script>
+            <script>
+                // Function to handle form submission
+                document.getElementById('edit-form').addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent default form submission behavior
+                    // Get the form data
+                    const formData = new FormData(event.target);
+                    const id = formData.get('id');
+                    const productName = formData.get('product_name');
+                    const quantity = formData.get('quantity');
+                    const rowNo = formData.get('rowno');
+                    const columnNo = formData.get('columnno');
+                    const price = formData.get('price');
+
+                    
+                    location.reload();
+                });
+
+                
+                const editButtons = document.querySelectorAll('.edit-btn');
+                editButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        
+                        const editContainer = document.getElementById('edit-form-container');
+                        editContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                });
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const editButtons = document.querySelectorAll(".edit-btn");
+                    const editFormContainer = document.getElementById("edit-form-container");
+
+                    editButtons.forEach(function (button) {
+                        button.addEventListener("click", function () {
+                            // Show the edit form container
+                            editFormContainer.style.display = "block";
+
+                            // Scroll down to the edit form container
+                            editFormContainer.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            });
+                        });
+
+                    });
+
+
+                    // Add event listener for the "Cancel" button to hide the edit form container
+                    const cancelBtn = document.getElementById("cancel-btn");
+                    cancelBtn.addEventListener("click", function () {
+                        editFormContainer.style.display = "none";
+                    });
+                });
+            </script>
+        </div>
+    </section>
+
+
+
+    <!-- <section class="section" id="product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                <div class="left-images">
+                    <img src="assets/images/single-product-01.jpg" alt="">
+                    <img src="assets/images/single-product-02.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="right-content">
+                    <h4>New Green Jacket</h4>
+                    <span class="price">$75.00</span>
+                    <ul class="stars">
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                    </ul>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod kon tempor incididunt ut labore.</span>
+                    <div class="quote">
+                        <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
+                    </div>
+                    <div class="quantity-content">
+                        <div class="left-content">
+                            <h6>No. of Orders</h6>
+                        </div>
+                        <div class="right-content">
+                            <div class="quantity buttons_added">
+                                <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total">
+                        <h4>Total: $210.00</h4>
+                        <div class="main-border-button"><a href="#">Add To Cart</a></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- ***** Product Area Ends ***** -->
+
+    <!-- ***** Footer Start ***** -->
+    <!-- <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                            <li><a href="#">hexashop@company.com</a></li>
+                            <li><a href="#">010-020-0340</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Shopping &amp; Categories</h4>
+                    <ul>
+                        <li><a href="#">Men’s Shopping</a></li>
+                        <li><a href="#">Women’s Shopping</a></li>
+                        <li><a href="#">Kid's Shopping</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Homepage</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Help &amp; Information</h4>
+                    <ul>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Tracking ID</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
+
+                            <br>Design: <a href="https://templatemo.com" target="_parent"
+                                title="free css templates">TemplateMo</a>
+                        </p>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+
+    <script src="{{ url_for('static', filename='js/jquery-2.1.0.min.js') }}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- Plugins -->
+    <script src="{{ url_for('static', filename='js/owl-carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/accordions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/datepicker.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollreveal.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/imgfix.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slick.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}"></script>
+
+    <!-- Global Init -->
+    <!-- <script src="static/js/custom.js"></script> -->
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+    <script>
+
+        $(function () {
+            var selectedClass = "";
+            $("p").click(function () {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function () {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
